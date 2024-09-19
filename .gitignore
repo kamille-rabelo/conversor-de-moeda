@@ -1,0 +1,35 @@
+### Maven ###
+target/
+!**/src/main/**/target/
+!**/src/test/**/target/
+
+### IntelliJ IDEA ###
+.idea/
+*.iml
+*.iws
+.idea/libraries/
+.idea/modules.xml
+.idea/jarRepositories.xml
+.idea/compiler.xml
+.idea/workspace.xml
+.idea/runConfigurations/
+*.ipr
+
+### Logs ###
+*.log
+
+### OS-Specific ###
+.DS_Store
+Thumbs.db
+
+### Java ###
+*.class
+
+### Maven POM Artifacts ###
+dependency-reduced-pom.xml
+buildNumber.properties
+.mvn/timing.properties
+
+### Miscellaneous ###
+*.tmp
+~*
