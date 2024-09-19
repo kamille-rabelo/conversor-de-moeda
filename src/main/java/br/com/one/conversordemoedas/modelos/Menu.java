@@ -2,6 +2,8 @@ package br.com.one.conversordemoedas.modelos;
 
 import java.util.Scanner;
 
+import static br.com.one.conversordemoedas.modelos.ConsultaConversao.buscaConversao;
+
 public class Menu {
     private final Scanner leitura;
 
@@ -16,8 +18,65 @@ public class Menu {
             printaComandos();
             var comando = getComando();
 
-            if (comando == 11) break;
+            if (comando == 11) {
+                System.out.println("Finalizando o sistema...");
+                System.out.println("Até mais '-'");
+                break;
+            }
 
+            double valor = getValor();
+            this.gerenciaComandos(comando, valor);
+        }
+    }
+
+    private double getValor() {
+        double valor;
+        System.out.println("Digite o valor que deseja converter:");
+
+        while (true) {
+            var entrada = leitura.nextLine().trim();
+
+            if (validaDigito(entrada)) {
+                valor = Double.parseDouble(entrada);
+                break;
+            }
+            System.out.println("Valor invalido! Tente novamente:");
+        }
+        return valor;
+    }
+
+    private void gerenciaComandos(int comando, double valor) {
+        switch (comando) {
+            case 1:
+                buscaConversao("USD", "BRL", valor);
+                break;
+            case 2:
+                buscaConversao("JPY", "USD", valor);
+                break;
+            case 3:
+                buscaConversao("CNY", "BRL", valor);
+                break;
+            case 4:
+                buscaConversao("BRL", "JPY", valor);
+                break;
+            case 5:
+                buscaConversao("EUR", "USD", valor);
+                break;
+            case 6:
+                buscaConversao("BRL", "USD", valor);
+                break;
+            case 7:
+                buscaConversao("GBP", "USD", valor);
+                break;
+            case 8:
+                buscaConversao("BRL", "ARS", valor);
+                break;
+            case 9:
+                buscaConversao("UYU", "USD", valor);
+                break;
+            case 10:
+                buscaConversao("BRL", "EUR", valor);
+                break;
         }
     }
 
@@ -27,7 +86,7 @@ public class Menu {
         while (true) {
             var entrada = leitura.nextLine().trim();
 
-            if (validaInt(entrada)) {
+            if (validaDigito(entrada)) {
                 comando = Integer.parseInt(entrada);
                 if ((comando > 0) && (comando < 12)) {
                     break;
@@ -38,11 +97,7 @@ public class Menu {
         return comando;
     }
 
-    private boolean validaInt(String entrada) {
-        return entrada.matches("\\d+");
-    }
-
-
+    private boolean validaDigito(String entrada) {return entrada.matches("\\d+");}
 
     private static void printaComandos() {
         System.out.println("""
