@@ -17,6 +17,9 @@ public class ConsultaConversao {
 
         try {
             var resposta = getResposta(endereco);
+            ValorConversao valorConversao = gson.fromJson(resposta.body(), ValorConversao.class);
+            System.out.println(String.format("Valor %.2f [%s] corresponde ao valor final => %.2f [%s]",
+                    valor, moedaBase, valorConversao.conversionResult(), moedaAlvo));
         } catch (IOException | InterruptedException e) {
             throw new RuntimeException("Problema ao tentar gerar reposta :(");
         } catch (UncheckedIOException e) {
@@ -24,10 +27,10 @@ public class ConsultaConversao {
         }
     }
 
-    private static HttpResponse<String> getResposta(String address) throws IOException, InterruptedException, UncheckedIOException {
+    private static HttpResponse<String> getResposta(String endereco) throws IOException, InterruptedException, UncheckedIOException {
         HttpClient cliente = HttpClient.newHttpClient();
         HttpRequest pedido = HttpRequest.newBuilder()
-                .uri(URI.create(address))
+                .uri(URI.create(endereco))
                 .build();
         return cliente
                 .send(pedido, HttpResponse.BodyHandlers.ofString());

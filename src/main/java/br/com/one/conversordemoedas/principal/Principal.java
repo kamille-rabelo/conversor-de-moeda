@@ -8,7 +8,7 @@ public class Principal {
 
         try {
             menu.iniciar();
-        } catch (RuntimeException e) {
+        } catch (RuntimeException | InterruptedException e) {
             System.out.println(e.getMessage());
             System.out.println("Finalizando o sistema...");
             System.out.println("Até mais '-'");

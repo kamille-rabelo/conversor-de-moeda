@@ -11,15 +11,18 @@ public class Menu {
         this.leitura = new Scanner(System.in);
     }
 
-    public void iniciar() {
+    public void iniciar() throws InterruptedException {
         System.out.println("\nBEM VINDO AO CONVERSOR DE MOEDAS :)");
 
         while(true) {
+            Thread.sleep(1300);
             printaComandos();
             var comando = getComando();
 
             if (comando == 11) {
+                Thread.sleep(1300);
                 System.out.println("Finalizando o sistema...");
+                Thread.sleep(1300);
                 System.out.println("Até mais '-'");
                 break;
             }
@@ -100,7 +103,7 @@ public class Menu {
     private boolean validaDigito(String entrada) {return entrada.matches("\\d+");}
 
     private static void printaComandos() {
-        System.out.println("""
+        System.out.print("""
                 **************************************************
                 
                 1) Dólar => Real Brasileiro
