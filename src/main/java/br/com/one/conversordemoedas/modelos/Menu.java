@@ -6,9 +6,11 @@ import static br.com.one.conversordemoedas.modelos.ConsultaConversao.buscaConver
 
 public class Menu {
     private final Scanner leitura;
+    private final GerenciaComandos gerenciaComandos;
 
     public Menu() {
         this.leitura = new Scanner(System.in);
+        this.gerenciaComandos = new GerenciaComandos();
     }
 
     public void iniciar() throws InterruptedException {
@@ -28,7 +30,7 @@ public class Menu {
             }
 
             double valor = getValor();
-            this.gerenciaComandos(comando, valor);
+            this.executaConversao(comando, valor);
         }
     }
 
@@ -48,39 +50,9 @@ public class Menu {
         return valor;
     }
 
-    private void gerenciaComandos(int comando, double valor) {
-        switch (comando) {
-            case 1:
-                buscaConversao("USD", "BRL", valor);
-                break;
-            case 2:
-                buscaConversao("JPY", "USD", valor);
-                break;
-            case 3:
-                buscaConversao("CNY", "BRL", valor);
-                break;
-            case 4:
-                buscaConversao("BRL", "JPY", valor);
-                break;
-            case 5:
-                buscaConversao("EUR", "USD", valor);
-                break;
-            case 6:
-                buscaConversao("BRL", "USD", valor);
-                break;
-            case 7:
-                buscaConversao("GBP", "USD", valor);
-                break;
-            case 8:
-                buscaConversao("BRL", "ARS", valor);
-                break;
-            case 9:
-                buscaConversao("UYU", "USD", valor);
-                break;
-            case 10:
-                buscaConversao("BRL", "EUR", valor);
-                break;
-        }
+    private void executaConversao(int comando, double valor) {
+        var moedas = gerenciaComandos.getMoedas(comando);
+        buscaConversao(moedas[0], moedas[1], valor);
     }
 
     private int getComando() {
