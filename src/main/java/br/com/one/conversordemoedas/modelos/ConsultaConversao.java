@@ -17,14 +17,22 @@ public class ConsultaConversao {
 
         try {
             var resposta = getResposta(endereco);
+            if (!validaResposta(resposta)) {
+                throw new RuntimeException("Problema ao realizar conversão :(");
+            }
+
             ValorConversao valorConversao = gson.fromJson(resposta.body(), ValorConversao.class);
-            System.out.println(String.format("Valor %.2f [%s] corresponde ao valor final => %.2f [%s]",
-                    valor, moedaBase, valorConversao.conversionResult(), moedaAlvo));
+            System.out.printf("Valor %.2f [%s] corresponde ao valor final => %.2f [%s]\n",
+                    valor, moedaBase, valorConversao.conversionResult(), moedaAlvo);
         } catch (IOException | InterruptedException e) {
-            throw new RuntimeException("Problema ao tentar gerar reposta :(");
+            throw new RuntimeException("Problema ao gerar reposta :(");
         } catch (UncheckedIOException e) {
             throw new RuntimeException("Problema ao tentar gerar cliente :(");
         }
+    }
+
+    private static boolean validaResposta(HttpResponse<String> resposta) {
+        return (resposta.statusCode() != 304) && !(resposta.body().contains("error"));
     }
 
     private static HttpResponse<String> getResposta(String endereco) throws IOException, InterruptedException, UncheckedIOException {

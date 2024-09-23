@@ -17,7 +17,7 @@ public class Menu {
         System.out.println("\nBEM VINDO AO CONVERSOR DE MOEDAS :)");
 
         while(true) {
-            Thread.sleep(1300);
+            Thread.sleep(1100);
             printaComandos();
             var comando = getComando();
 
