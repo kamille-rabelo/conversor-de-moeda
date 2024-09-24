@@ -18,7 +18,7 @@ public class Menu {
 
         while(true) {
             Thread.sleep(1100);
-            printaComandos();
+            gerenciaComandos.printaComandos();
             var comando = getComando();
 
             if (comando == 11) {
@@ -73,26 +73,4 @@ public class Menu {
     }
 
     private boolean validaDigito(String entrada) {return entrada.matches("\\d+");}
-
-    private static void printaComandos() {
-        System.out.print("""
-                ****************************************************************
-                
-                1) Dólar => Real Brasileiro
-                2) Iene => Dólar
-                3) Yuan Chinês => Dólar
-                4) Real Brasileiro => Iene
-                5) Euro => Dólar
-                6) Real Brasileiro => Dólar
-                7) Libra Esterlina => Dólar
-                8) Real Brasileiro => Peso Argentino
-                9) Peso Uruguaio => Dólar
-                10) Real Brasileiro => Euro
-                11) Sair
-                
-                Escolha uma opção válida:
-                
-                ****************************************************************
-                """);
-    }
 }
